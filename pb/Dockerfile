@@ -10,11 +10,15 @@ RUN apk add --no-cache \
 ADD https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSION}/pocketbase_${PB_VERSION}_linux_amd64.zip /tmp/pb.zip
 RUN unzip /tmp/pb.zip -d /pb/
 
-COPY pb_data[s] /pb/
-COPY pb_migration[s] /pb/
-COPY pb_public[s] /pb/
+COPY pb_migration[s] /pb/pb_migrations
+COPY pb_public[s] /pb/pb_public
+COPY pb_hook[s] /pb/pb_hooks
 
 EXPOSE 80
 
+WORKDIR /pb/
+
+RUN ls /pb/
+
 # start PocketBase
-CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:80"]
+CMD ["./pocketbase", "serve", "--http=0.0.0.0:80"]
