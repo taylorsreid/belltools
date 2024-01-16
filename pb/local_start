@@ -1,0 +1,2 @@
+#!/bin/bash
+npm install && sudo ./pocketbase serve --http=0.0.0.0:80
