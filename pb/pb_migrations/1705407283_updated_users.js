@@ -6,13 +6,15 @@ migrate((db) => {
   collection.options = {
     "allowEmailAuth": true,
     "allowOAuth2Auth": false,
-    "allowUsernameAuth": false,
+    "allowUsernameAuth": true,
     "exceptEmailDomains": null,
     "manageRule": null,
     "minPasswordLength": 8,
-    "onlyEmailDomains": [],
+    "onlyEmailDomains": [
+      "disney.com"
+    ],
     "onlyVerified": true,
-    "requireEmail": false
+    "requireEmail": true
   }
 
   // remove

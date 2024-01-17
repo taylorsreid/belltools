@@ -1,16 +1,16 @@
 /// <reference path="../pb_data/types.d.ts" />
 migrate((db) => {
   const collection = new Collection({
-    "id": "ltue1o2m8so5sdo",
-    "created": "2024-01-16 11:48:03.512Z",
-    "updated": "2024-01-16 11:48:03.512Z",
-    "name": "external_api_requests",
-    "type": "base",
+    "id": "odbbgtsvv6sphlo",
+    "created": "2024-01-17 03:48:02.217Z",
+    "updated": "2024-01-17 03:48:02.217Z",
+    "name": "total_requests_per_person",
+    "type": "view",
     "system": false,
     "schema": [
       {
         "system": false,
-        "id": "unc3o7kt",
+        "id": "83iie3xq",
         "name": "user",
         "type": "relation",
         "required": false,
@@ -23,6 +23,20 @@ migrate((db) => {
           "maxSelect": 1,
           "displayFields": null
         }
+      },
+      {
+        "system": false,
+        "id": "4y3rlka2",
+        "name": "total",
+        "type": "number",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "noDecimal": false
+        }
       }
     ],
     "indexes": [],
@@ -31,13 +45,15 @@ migrate((db) => {
     "createRule": null,
     "updateRule": null,
     "deleteRule": null,
-    "options": {}
+    "options": {
+      "query": "SELECT id as id, user as user, COUNT(id) as total FROM external_api_requests GROUP BY user;"
+    }
   });
 
   return Dao(db).saveCollection(collection);
 }, (db) => {
   const dao = new Dao(db);
-  const collection = dao.findCollectionByNameOrId("ltue1o2m8so5sdo");
+  const collection = dao.findCollectionByNameOrId("odbbgtsvv6sphlo");
 
   return dao.deleteCollection(collection);
 })
