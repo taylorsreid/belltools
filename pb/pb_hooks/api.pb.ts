@@ -6,7 +6,7 @@ routerAdd("GET", "/api/flights", (c) => {
 
     let data = {};
 
-    if (!$app.isDev()) { // does not work due to an upstream bug
+    if (!$app.isDev()) {
 
         // @ts-ignore
         data = $http.send({
