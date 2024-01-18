@@ -10,7 +10,7 @@ routerAdd("GET", "/api/flights", (c) => {
 
         // @ts-ignore
         data = $http.send({
-            url: `http://api.aviationstack.com/v1/flights?access_key=${process.env.AS_API_KEY}&arr_iata=HNL`,
+            url: `http://api.aviationstack.com/v1/flights?access_key=${process.env.AS_API_KEY}&arr_iata=HNL&flight_status=active`,
             method: "GET"
         })
         
@@ -23,7 +23,7 @@ routerAdd("GET", "/api/flights", (c) => {
         data.statusCode = 203
         // @ts-ignore
         data.json = $http.send({
-            url: 'http://localhost:8090/testData.json',
+            url: 'http://localhost:8090/aviationStackTestData.json',
             method: 'GET'
         }).json
     }
