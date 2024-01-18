@@ -21,6 +21,7 @@ function getDelayStyle(delayInMinutes: number): string {
     }
 }
 
+// disabled for now due to large paginated responses
 function getStatusStyle(status: string) {
     switch (status) {
         case 'active':
@@ -35,56 +36,60 @@ function getStatusStyle(status: string) {
 
 <template>
 
-    <button @click="emit('logoutClick')">Logout</button>
+    <button @click="emit('logoutClick')" class="absoluteTopRight">Logout</button>
 
-    <h1>Lani - Flight Tracking</h1>
+    <h1 style="text-align: center;">Lani - Active Flights</h1>
+
     <hr>
+    
+    <div class="centeredInPage">
+        <label for="sortBy">Sort By </label>
+        <select id="sortBy" v-model="sortBy">
+            <option value="eta" selected>ETA</option>
+            <option value="origin">Origin</option>
+            <option value="airline">Airline</option>
+        </select>
+        |
+        <label for="hideScheduled">Hide Scheduled</label>
+        <input type="checkbox" id="hideScheduled" v-model="hideScheduled" checked>
+        |
+        <label for="hideLanded">Hide Landed</label>
+        <input type="checkbox" id="hideLanded" v-model="hideLanded" checked>
+        |
+        <label for="hideCancelled">Hide Cancelled</label>
+        <input type="checkbox" id="hideCancelled" v-model="hideCancelled" checked>
 
-    <label for="sortBy">Sort By </label>
-    <select id="sortBy" v-model="sortBy">
-        <option value="eta" selected>ETA</option>
-        <option value="origin">Origin</option>
-        <option value="airline">Airline</option>
-    </select>
-    |
-    <label for="hideScheduled">Hide Scheduled</label>
-    <input type="checkbox" id="hideScheduled" v-model="hideScheduled" checked>
-    |
-    <label for="hideLanded">Hide Landed</label>
-    <input type="checkbox" id="hideLanded" v-model="hideLanded" checked>
-    |
-    <label for="hideCancelled">Hide Cancelled</label>
-    <input type="checkbox" id="hideCancelled" v-model="hideCancelled" checked>
+        <table>
+            <tr>
+                <th>Flight</th>
+                <th>Origin</th>
+                <th>Airline</th>
+                <th>ETA</th>
+                <th>Delay</th>
+                <th>Status</th>
+            </tr>
+            <tr v-for="(e, i) in flightsStore.sortedFlights" :key="i">
 
-    <table>
-        <tr>
-            <th>Flight</th>
-            <th>Origin</th>
-            <th>Airline</th>
-            <th>ETA</th>
-            <th>Delay</th>
-            <th>Status</th>
-        </tr>
-        <tr v-for="(e, i) in flightsStore.filteredSortedFlights" :key="i">
+                <td>{{ e.flight.iata }}</td>
+                <td>{{ e.departure.airport }}</td>
+                <td>{{ e.airline.name }}</td>
+                <td>
+                    <span v-if="e.flight_status !== 'landed'">{{ e.arrival.estimated.substring(11, 16) }}</span>
+                    <!-- casting the string to a date causes Javascript to do an incorrect timezone conversion -->
+                </td>
+                <td :style="getDelayStyle(e.departure.delay)">
+                    <span v-if="e.departure.delay">{{ e.departure.delay }}</span>
+                    <span v-else>0</span>
+                </td>
+                <!-- disabled for now due to large paginated responses -->
+                <!-- <td :style="getStatusStyle(e.flight_status)">
+                    {{ e.flight_status }}
+                    <span v-if="e.flight_status === 'landed'">
+                        @ {{ e.arrival.actual.substring(11, 16) }}
+                    </span>
+                </td> -->
 
-            <td>{{ e.flight.iata }}</td>
-            <td>{{ e.departure.airport }}</td>
-            <td>{{ e.airline.name }}</td>
-            <td>
-                <span v-if="e.flight_status !== 'landed'">{{ e.arrival.estimated.substring(11, 16) }}</span>
-                <!-- casting the string to a date causes Javascript to do an incorrect timezone conversion -->
-            </td>
-            <td :style="getDelayStyle(e.departure.delay)">
-                <span v-if="e.departure.delay">{{ e.departure.delay }}</span>
-                <span v-else>0</span>
-            </td>
-            <td :style="getStatusStyle(e.flight_status)">
-                {{ e.flight_status }}
-                <span v-if="e.flight_status === 'landed'">
-                    @ {{ e.arrival.actual.substring(11, 16) }}
-                </span>
-            </td>
-
-        </tr>
-    </table>
+            </tr>
+        </table>
+    </div>
 </template>
