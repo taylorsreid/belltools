@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "pocketbase": "^0.20.3",
     "vue": "^3.3.11"
   },
   "devDependencies": {
