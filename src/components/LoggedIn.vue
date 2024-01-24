@@ -52,6 +52,9 @@ function getVarianceInMinutes(flight:Flight): number {
     <hr>
     
     <div class="centeredInPage">
+
+        <button @click="flightsStore.callApi()">Refresh</button>
+        
         <label for="sortBy">Sort By </label>
         <select id="sortBy" v-model="sortBy">
             <option value="eta" selected>ETA</option>
