@@ -8,10 +8,14 @@ routerAdd("GET", "/api/flights", (c) => {
 
     if (!$app.isDev()) {
 
-        // @ts-ignore
         data = $http.send({
-            url: `http://api.aviationstack.com/v1/flights?access_key=${process.env.AS_API_KEY}&arr_iata=HNL&flight_status=active`,
-            method: "GET"
+            url: `https://aeroapi.flightaware.com/aeroapi/flights/search/advanced?query={in dest {PHNL}} {airline 1} {false cancelled} {in status {A Z}}&max_pages=1`,
+            method: "GET",
+            headers: {
+                Accept: `application/json; charset=UTF-8`,
+                // @ts-ignore
+                'x-apikey': process.env.FA_API_KEY
+            }
         })
         
         $app.dao().saveRecord(new Record($app.dao().findCollectionByNameOrId("external_api_requests"), {
@@ -23,7 +27,7 @@ routerAdd("GET", "/api/flights", (c) => {
         data.statusCode = 203
         // @ts-ignore
         data.json = $http.send({
-            url: 'http://localhost:8090/aviationStackTestData.json',
+            url: 'http://localhost:8090/flightAwareTestData.json',
             method: 'GET'
         }).json
     }
