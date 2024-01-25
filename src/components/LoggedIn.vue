@@ -13,10 +13,10 @@ const emit = defineEmits(['logoutClick'])
 
 function getVarianceStyle(flight:Flight): string {
     const varianceInMinutes = getVarianceInMinutes(flight)
-    if (varianceInMinutes < 5 || isNaN(varianceInMinutes)) {
-        return 'background-color: #129e00; color: white' // green
+    if (varianceInMinutes <= 0 || isNaN(varianceInMinutes)) {
+        return 'background-color: #0026ff; color: white' // green
     }
-    else if (varianceInMinutes >= 5 && varianceInMinutes <= 15) {
+    else if (varianceInMinutes > 0 && varianceInMinutes <= 15) {
         return 'background-color: #c5b100; color: white' // yellow
     }
     else {
@@ -26,10 +26,11 @@ function getVarianceStyle(flight:Flight): string {
 
 function getStatusStyle(flight:Flight) {
     if(flight.actual_on) {
-        return 'background-color: #0026ff; color: white' //blue
+        return 'background-color: #129e00; color: white' // green
     }
     else {
-        return 'background-color: #129e00; color: white' // green
+        
+        return 'background-color: #0026ff; color: white' //blue
     }
 }
 
@@ -45,33 +46,34 @@ function getVarianceInMinutes(flight:Flight): number {
 
 <template>
 
-    <button @click="emit('logoutClick')" class="absoluteTopRight">Logout</button>
+    <div>
+        <h1>Lani - Active Flights</h1>
+        <button @click="emit('logoutClick')" class="absoluteTopRight">Logout</button>
+    </div>
 
-    <h1 style="text-align: center;">Lani - Active Flights</h1>
-
-    <hr>
-    
     <div class="centeredInPage">
 
         <button @click="flightsStore.callApi()">Refresh</button>
-        
+        <span style="padding: 5rem;">|</span>
         <label for="sortBy">Sort By </label>
         <select id="sortBy" v-model="sortBy">
             <option value="eta" selected>ETA</option>
             <option value="origin">Origin</option>
             <option value="flight">Flight</option>
         </select>
-        |
+        <span style="padding: 5rem;">|</span>
         <label for="hideLanded">Hide Landed</label>
-        <input type="checkbox" id="hideLanded" v-model="hideLanded" checked>
+        <input type="checkbox" id="hideLanded" v-model="hideLanded">
+    </div>
 
-        <table>
+    <div class="centeredInPage resultsBackground ">
+        <table class="centeredInPage resultsTable">
             <tr>
                 <th>Flight</th>
                 <th>Origin</th>
                 <th>ETA</th>
-                <th>Variance</th>
                 <th>Status</th>
+                <th>Delay</th>
             </tr>
             <tr v-for="(e, i) in flightsStore.filteredSortedFlights" :key="i">
 
@@ -83,20 +85,23 @@ function getVarianceInMinutes(flight:Flight): number {
                     <span v-if="e.predicted_on">{{ new Date(e.predicted_on).toTimeString().substring(0, 5) }}</span>
                 </td>
 
-                <td :style="getVarianceStyle(e)">
-                    <span>{{ getVarianceInMinutes(e) }}</span>
-                </td>
-
                 <td :style="getStatusStyle(e)">
                     <span v-if="e.actual_on">
                         Landed @ {{ new Date(e.actual_on).toTimeString().substring(0, 5) }}
                     </span>
                     <span v-else>
-                        Active
+                        In Air
                     </span>
+                </td>
+
+                <td :style="getVarianceStyle(e)">
+                    <span v-if="getVarianceInMinutes(e) > 0">{{ getVarianceInMinutes(e) }} minutes</span>
+                    <span v-else>On Time</span>
                 </td>
 
             </tr>
         </table>
     </div>
+
+    
 </template>

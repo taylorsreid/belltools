@@ -7,7 +7,7 @@ const emit = defineEmits(['loginAttempt'])
 </script>
 
 <template>
-    <div>
+    <div class="centeredInPage">
         <form @submit="(e) => {e.preventDefault(); emit('loginAttempt', email, password)} ">
 
             <table>
