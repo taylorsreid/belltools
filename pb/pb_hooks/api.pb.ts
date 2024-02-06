@@ -9,7 +9,7 @@ routerAdd("GET", "/api/flights", (c) => {
     if (!$app.isDev()) {
 
         data = $http.send({
-            url: `https://aeroapi.flightaware.com/aeroapi/flights/search/advanced?query={in dest {PHNL}} {airline 1} {false cancelled} {in status {A Z}}&max_pages=1`,
+            url: `https://aeroapi.flightaware.com/aeroapi/flights/search/advanced?query={in dest {PHNL}} {airline 1} {false cancelled} {in status {A Z}}&max_pages=10`,
             method: "GET",
             headers: {
                 Accept: `application/json; charset=UTF-8`,
