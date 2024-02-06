@@ -11,7 +11,7 @@
 - Created in 2024 by Taylor Reid for Hawaii's hotel workers.
 
 ## Where
-- Made in Hawaii for Hawaii ![Hawaii](https://raw.githubusercontent.com/taylorsreid/lani/main/src/assets/Flag_of_Hawaii.svg)
+- Made in Hawaii for Hawaii ![Hawaii](https://raw.githubusercontent.com/taylorsreid/lani/main/frontend/src/assets/Flag_of_Hawaii.svg)
 
 ## How
 - [FlightAware AeroAPI](https://www.flightaware.com/commercial/aeroapi/)
