@@ -8,10 +8,15 @@
 - While similar such dashboards already exist, many of them are large, cumbersome, and often contain more information than is needed. Which makes them difficult to use.
 
 ## Who
-- Created by Taylor Reid in 2024
+- Created in 2024 by Taylor Reid for Hawaii's hotel workers.
+
+## Where
+- Made in Hawaii for Hawaii ![Hawaii](https://raw.githubusercontent.com/taylorsreid/lani/main/src/assets/Flag_of_Hawaii.svg)
 
 ## How
 - [FlightAware AeroAPI](https://www.flightaware.com/commercial/aeroapi/)
+- [Docker](https://github.com/docker)
+- [Nginx](https://github.com/nginx/nginx)
 - [Pocketbase](https://github.com/pocketbase/pocketbase)
 - [Vue](https://github.com/vuejs/core)
 - [Pinia](https://github.com/vuejs/pinia)

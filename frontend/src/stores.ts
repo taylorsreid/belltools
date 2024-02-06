@@ -31,11 +31,17 @@ export const useFlightsStore = defineStore('flights', {
 
                 // sort
                 switch (this.sortBy) {
-                    case 'origin':
+                    case 'city':
                         return f.sort((a, b) => {
                             a.origin.city ??= ''
                             b.origin.city ??= ''
                             return a.origin.city.localeCompare(b.origin.city) 
+                        })
+                    case 'airport':
+                        return f.sort((a, b) => {
+                            a.origin.name ??= ''
+                            b.origin.name ??= ''
+                            return a.origin.name.localeCompare(b.origin.name)
                         })
                     case 'flight':
                         return f.sort((a, b) => {

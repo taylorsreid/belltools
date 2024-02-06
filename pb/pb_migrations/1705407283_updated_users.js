@@ -17,24 +17,6 @@ migrate((db) => {
   // remove
   collection.schema.removeField("users_avatar")
 
-  // add
-  collection.schema.addField(new SchemaField({
-    "system": false,
-    "id": "hfcwmmoj",
-    "name": "requests",
-    "type": "relation",
-    "required": false,
-    "presentable": false,
-    "unique": false,
-    "options": {
-      "collectionId": "ltue1o2m8so5sdo",
-      "cascadeDelete": false,
-      "minSelect": null,
-      "maxSelect": null,
-      "displayFields": null
-    }
-  }))
-
   return dao.saveCollection(collection)
 }, (db) => {
   const dao = new Dao(db)

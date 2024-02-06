@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import { AuthModel } from 'pocketbase';
+import { PropType } from 'vue';
+
+
 defineProps({
-    name: String
+    user: Object as PropType<AuthModel>
 })
 
 const emit = defineEmits({
@@ -14,7 +18,7 @@ const emit = defineEmits({
         <li>&nbsp;</li>
         <li><a href="#" @click="emit('nav', 'about')">About</a></li>
         <li class="dropdown">
-            <a class="dropbtn">{{ name }}  &#9660;</a>
+            <a class="dropbtn">{{ user?.name }}  &#9660;</a>
             <div class="dropdown-content">
                 <a href="#" @click="emit('nav', 'account')">My Account</a>
                 <a href="#" @click="emit('nav', 'logout')">Logout</a>

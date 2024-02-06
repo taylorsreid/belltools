@@ -52,7 +52,8 @@ function getVarianceInMinutes(flight:Flight): number {
         <label for="sortBy">Sort By </label>
         <select id="sortBy" v-model="sortBy">
             <option value="eta" selected>ETA</option>
-            <option value="origin">Origin</option>
+            <option value="city">City</option>
+            <option value="airport">Airport</option>
             <option value="flight">Flight</option>
         </select>
         <span style="padding: 5rem;">|</span>
@@ -64,7 +65,8 @@ function getVarianceInMinutes(flight:Flight): number {
         <table class="centeredText" id="resultsTable">
             <tr>
                 <th>Flight</th>
-                <th>Origin</th>
+                <th>City</th>
+                <th>Airport</th>
                 <th>ETA</th>
                 <th>Status</th>
                 <th>Delay</th>
@@ -73,7 +75,9 @@ function getVarianceInMinutes(flight:Flight): number {
 
                 <td>{{ e.ident_iata }}</td>
 
-                <td>{{ e.origin.name }} - {{ e.origin.city }}</td>
+                <td>{{ e.origin.city }}</td>
+
+                <td>{{ e.origin.name }} </td>
 
                 <td>
                     <span v-if="e.predicted_on">{{ new Date(e.predicted_on).toTimeString().substring(0, 5) }}</span>
@@ -98,19 +102,3 @@ function getVarianceInMinutes(flight:Flight): number {
     </MainContent>
     
 </template>
-
-<style>
-#resultsTable {
-    width: 95%;
-    border-collapse: collapse;
-
-    tr {
-        border-bottom: 1px solid gray;
-        ;
-
-        td {
-            padding: 1rem;
-        }
-    }
-}
-</style>

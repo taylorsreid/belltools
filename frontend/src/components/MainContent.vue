@@ -1,6 +1,10 @@
 <script setup lang="ts">
     defineProps({
-        class: String
+        class: String,
+        width: {
+            type: String,
+            default: '80%'
+        }
     })
 </script>
 
@@ -15,7 +19,7 @@
 <style scoped>
     #resultsBackground {
         background-color: white;
-        width: 80%;
+        width: v-bind(width);
         border-radius: 40px;
         padding: 1%;
     }

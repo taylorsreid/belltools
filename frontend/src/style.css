@@ -30,9 +30,30 @@ body {
     text-align: center;
 }
 
-.title {
+h1 {
     text-align: center;
     color: white;
     font-size: xxx-large;
     font-family: 'Poppins', sans-serif;
+}
+
+/* h2 {
+    text-align: center;
+    color: white;
+    font-size: large;
+    font-family: 'Poppins', sans-serif;
+} */
+
+#resultsTable {
+    width: 95%;
+    border-collapse: collapse;
+
+    tr {
+        border-bottom: 1px solid gray;
+        ;
+
+        td {
+            padding: 1rem;
+        }
+    }
 }
