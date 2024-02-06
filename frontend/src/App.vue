@@ -2,11 +2,15 @@
 import PocketBase from 'pocketbase';
 import { Ref, ref } from 'vue';
 import apiUrl from './apiUrl'
-import LoggedInView from './components/LoggedIn.vue'
+import Home from './components/Home.vue'
 import LoggedOutView from './components/LoggedOut.vue';
+import Layout from './components/Layout.vue';
+import About from './components/About.vue'
+import Account from './components/Account.vue'
 
 const pb: PocketBase = new PocketBase(apiUrl);
 const isLoggedIn: Ref<boolean> = ref(pb.authStore.isValid)
+const currentPage: Ref<String> = ref('home')
 const name: Ref<string> = ref(localStorage.getItem('name') ?? '')
 
 let authData: any;
@@ -24,13 +28,23 @@ function logout() {
     isLoggedIn.value = false
 }
 
+function navigate(target:string) {
+    if (target === 'logout') {
+        logout()
+        currentPage.value = 'home'
+    } else {
+        currentPage.value = target
+    }
+}
 </script>
 
 <template>
-
     <Suspense>
-        <LoggedInView v-if="isLoggedIn" @logout-click="logout" />
+        <Layout v-if="isLoggedIn" :name="name" @nav="navigate">
+            <Home v-if="currentPage === 'home'" />
+            <About v-if="currentPage === 'about'" />
+            <Account v-if="currentPage === 'account'" />
+        </Layout>
     </Suspense>
     <LoggedOutView v-if="!isLoggedIn" @login-attempt="login" />
-    
 </template>

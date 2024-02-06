@@ -6,10 +6,9 @@ const flightsStore = useFlightsStore()
 await flightsStore.callApi()
 
 import { storeToRefs } from 'pinia'
+import MainContent from './MainContent.vue';
 // @ts-ignore
 const { apiResponse, hideLanded, sortBy } = storeToRefs(flightsStore)
-
-const emit = defineEmits(['logoutClick'])
 
 function getVarianceStyle(flight:Flight): string {
     const varianceInMinutes = getVarianceInMinutes(flight)
@@ -29,7 +28,6 @@ function getStatusStyle(flight:Flight) {
         return 'background-color: #129e00; color: white' // green
     }
     else {
-        
         return 'background-color: #0026ff; color: white' //blue
     }
 }
@@ -46,13 +44,9 @@ function getVarianceInMinutes(flight:Flight): number {
 
 <template>
 
-    <div>
-        <h1>Lani - Active Flights</h1>
-        <button @click="emit('logoutClick')" class="absoluteTopRight">Logout</button>
-    </div>
+    <h1 class="title">Arriving Flights</h1>
 
-    <div class="centeredInPage">
-
+    <div class="centeredText">
         <button @click="flightsStore.callApi()">Refresh</button>
         <span style="padding: 5rem;">|</span>
         <label for="sortBy">Sort By </label>
@@ -66,8 +60,8 @@ function getVarianceInMinutes(flight:Flight): number {
         <input type="checkbox" id="hideLanded" v-model="hideLanded">
     </div>
 
-    <div class="centeredInPage resultsBackground ">
-        <table class="centeredInPage resultsTable">
+    <MainContent class="centeredText">
+        <table class="centeredText" id="resultsTable">
             <tr>
                 <th>Flight</th>
                 <th>Origin</th>
@@ -79,7 +73,7 @@ function getVarianceInMinutes(flight:Flight): number {
 
                 <td>{{ e.ident_iata }}</td>
 
-                <td>{{ e.origin.name }}</td>
+                <td>{{ e.origin.name }} - {{ e.origin.city }}</td>
 
                 <td>
                     <span v-if="e.predicted_on">{{ new Date(e.predicted_on).toTimeString().substring(0, 5) }}</span>
@@ -101,7 +95,22 @@ function getVarianceInMinutes(flight:Flight): number {
 
             </tr>
         </table>
-    </div>
-
+    </MainContent>
     
 </template>
+
+<style>
+#resultsTable {
+    width: 95%;
+    border-collapse: collapse;
+
+    tr {
+        border-bottom: 1px solid gray;
+        ;
+
+        td {
+            padding: 1rem;
+        }
+    }
+}
+</style>

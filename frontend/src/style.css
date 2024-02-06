@@ -19,32 +19,20 @@ body {
     }
 }
 
-.centeredInPage {
+.centered {
+    margin: auto;
+    width: 50%;
+}
+
+.centeredText {
     margin: auto;
     width: 50%;
     text-align: center;
 }
 
-.absoluteTopRight {
-    position: absolute;
-    top: 2.5%;
-    right: 2.5%;
-}
-
-.resultsBackground {
-    background-color: white;
-    width: 80%;
-    border-radius: 2.5%;
-    padding: 1%;
-}
-
-.resultsTable {
-    width: 95%;
-    border-collapse: collapse;
-    tr {
-        border-bottom: 1px solid gray;;
-        td {
-            padding: 1rem;
-        }
-    }
+.title {
+    text-align: center;
+    color: white;
+    font-size: xxx-large;
+    font-family: 'Poppins', sans-serif;
 }

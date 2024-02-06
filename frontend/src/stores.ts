@@ -27,27 +27,26 @@ export const useFlightsStore = defineStore('flights', {
                     else {
                         return true
                     }
-                    // return (this.hideLanded && !f.actual_on)
                 })
 
                 // sort
                 switch (this.sortBy) {
                     case 'origin':
                         return f.sort((a, b) => {
-                            a.origin.city ??= 'Unknown'
-                            b.origin.city ??= 'Unknown'
+                            a.origin.city ??= ''
+                            b.origin.city ??= ''
                             return a.origin.city.localeCompare(b.origin.city) 
                         })
                     case 'flight':
                         return f.sort((a, b) => {
-                            a.ident_iata ??= 'Unknown'
-                            b.ident_iata ??= 'Unknown'
+                            a.ident_iata ??= ''
+                            b.ident_iata ??= ''
                             return a.ident_iata.localeCompare(b.ident_iata)
                         })
                     default: // ETA
                         return f.sort((a, b) => {
-                            a.predicted_on ??= 'Unknown'
-                            b.predicted_on ??= 'Unknown'
+                            a.predicted_on ??= ''
+                            b.predicted_on ??= ''
                             return new Date(a.predicted_on).getTime() - new Date(b.predicted_on).getTime()
                         })
                 }

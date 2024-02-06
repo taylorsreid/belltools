@@ -10,9 +10,6 @@ migrate((db) => {
     "exceptEmailDomains": null,
     "manageRule": null,
     "minPasswordLength": 8,
-    "onlyEmailDomains": [
-      "disney.com"
-    ],
     "onlyVerified": true,
     "requireEmail": true
   }

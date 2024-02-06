@@ -1,1 +1,1 @@
-export default "http://localhost:8090"
+export default "https://lani-api.up.railway.app"

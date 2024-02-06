@@ -8,8 +8,6 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
-dist-ssr
 *.local
 pb_data
 pocketbase
@@ -26,4 +24,4 @@ pocketbase
 .vscode/extensions.json
 
 .env
-pb/pb_public/*
+frontend/dist/*

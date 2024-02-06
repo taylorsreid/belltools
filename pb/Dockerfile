@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ARG PB_VERSION=0.20.7
+ARG PB_VERSION=0.21.1
 
 RUN apk add --no-cache \
     unzip \
@@ -10,15 +10,11 @@ RUN apk add --no-cache \
 ADD https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSION}/pocketbase_${PB_VERSION}_linux_amd64.zip /tmp/pb.zip
 RUN unzip /tmp/pb.zip -d /pb/
 
-COPY pb_migration[s] /pb/pb_migrations
-COPY pb_public[s] /pb/pb_public
-COPY pb_hook[s] /pb/pb_hooks
+COPY ./pb_migrations /pb/pb_migrations
+COPY ./pb_public /pb/pb_public
+COPY ./pb_hooks /pb/pb_hooks
 
-EXPOSE 80
-
-WORKDIR /pb/
-
-RUN ls /pb/
+EXPOSE 8090
 
 # start PocketBase
-CMD ["./pocketbase", "serve", "--http=0.0.0.0:80"]
+ENTRYPOINT ["/pb/pocketbase", "serve", "--dev", "--http=0.0.0.0:8090"]
