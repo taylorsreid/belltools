@@ -24,4 +24,4 @@ pocketbase
 .vscode/extensions.json
 
 .env
-frontend/dist/*
+pb/pb_public

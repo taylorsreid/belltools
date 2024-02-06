@@ -1,0 +1,1 @@
+export default "https://lani.up.railway.app"
