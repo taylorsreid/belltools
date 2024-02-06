@@ -11,15 +11,12 @@ import Account from './components/Account.vue'
 const pb: PocketBase = new PocketBase(apiUrl);
 const isLoggedIn: Ref<boolean> = ref(pb.authStore.isValid)
 const currentPage: Ref<String> = ref('home')
-const name: Ref<string> = ref(localStorage.getItem('name') ?? '')
 
 let authData: any;
 
 async function login(email:string, password:string) {
     authData = await pb.collection('users').authWithPassword(email, password);
     isLoggedIn.value = pb.authStore.isValid
-    name.value = authData.record.name
-    localStorage.setItem('name', authData.record.name)
 }
 
 function logout() {
@@ -40,7 +37,7 @@ function navigate(target:string) {
 
 <template>
     <Suspense>
-        <Layout v-if="isLoggedIn" :name="name" @nav="navigate">
+        <Layout v-if="isLoggedIn" :name="pb.authStore.model?.name" @nav="navigate">
             <Home v-if="currentPage === 'home'" />
             <About v-if="currentPage === 'about'" />
             <Account v-if="currentPage === 'account'" />
