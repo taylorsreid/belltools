@@ -17,4 +17,4 @@ COPY ./pb_hooks /pb/pb_hooks
 EXPOSE 8090
 
 # start PocketBase
-ENTRYPOINT ["/pb/pocketbase", "serve", "--dev", "--http=0.0.0.0:8090"]
+ENTRYPOINT ["/pb/pocketbase", "serve", "--http=0.0.0.0:8090"]
