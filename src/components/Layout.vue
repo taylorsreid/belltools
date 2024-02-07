@@ -1,27 +1,25 @@
 <script setup lang="ts">
-import { AuthModel } from 'pocketbase';
-import { PropType } from 'vue';
+import PocketBase from 'pocketbase'
+import apiUrl from '../apiUrl';
+const pb = new PocketBase(apiUrl);
 
-
-defineProps({
-    user: Object as PropType<AuthModel>
-})
-
-const emit = defineEmits({
-    nav: String
-})
+function logout() {
+    pb.authStore.clear()
+    localStorage.clear()
+}
 </script>
 
 <template>
+    <div v-if="pb.authStore.model?.email === 'demouser@example.com'" id="demoBanner">You are viewing Lani in demo mode. Data will be static.</div>
     <ul class="navbar">
-        <li><a href="#" @click="emit('nav', 'home')">Home</a></li>
+        <li><RouterLink to="/" class="routerLink">Home</RouterLink></li>
         <li>&nbsp;</li>
-        <li><a href="#" @click="emit('nav', 'about')">About</a></li>
+        <li><RouterLink to="/about" class="routerLink">About</RouterLink></li>
         <li class="dropdown">
-            <a class="dropbtn">{{ user?.name }}  &#9660;</a>
+            <a class="dropbtn">{{ pb.authStore.model?.name }} &#9660;</a>
             <div class="dropdown-content">
-                <a href="#" @click="emit('nav', 'account')">My Account</a>
-                <a href="#" @click="emit('nav', 'logout')">Logout</a>
+                <RouterLink to="/account">My Account</RouterLink>
+                <RouterLink to="/login" @click="logout">Logout</RouterLink>
             </div>
         </li>
     </ul>
@@ -30,7 +28,6 @@ const emit = defineEmits({
 </template>
 
 <style scoped>
-
 .navbar {
     list-style-type: none;
     padding: 0;
@@ -45,7 +42,7 @@ li {
     float: left;
 }
 
-li a, .dropbtn {
+li, .dropbtn, .routerLink {
     display: inline-block;
     color: white;
     text-align: center;
@@ -83,5 +80,13 @@ li.dropdown {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+#demoBanner {
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+    font-size: larger;
 }
 </style>

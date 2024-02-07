@@ -8,7 +8,7 @@ const pb: PocketBase = new PocketBase(apiUrl);
 export const useFlightsStore = defineStore('flights', {
     state: () => ({
         apiResponse: {} as ApiResponse,
-        hideLanded: false,
+        hideLanded: true,
         sortBy: 'eta'
     }),
     getters: {
