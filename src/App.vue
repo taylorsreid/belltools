@@ -3,7 +3,7 @@ import PocketBase, { ClientResponseError } from 'pocketbase';
 import { Ref, ref } from 'vue';
 import apiUrl from './apiUrl'
 import Home from './components/Home.vue'
-import LoggedOutView from './components/LoggedOut.vue';
+import Login from './components/Login.vue';
 import Layout from './components/Layout.vue';
 import About from './components/About.vue'
 import Account from './components/Account.vue'
@@ -57,7 +57,7 @@ function navigate(target:string) {
         </Layout>
         </div>
     </Suspense>
-    <LoggedOutView v-if="!isLoggedIn" @login-attempt="login" :error-message="errorMessage" />
+    <Login v-if="!isLoggedIn" @login-attempt="login" :error-message="errorMessage" />
 </template>
 
 <style scoped>
