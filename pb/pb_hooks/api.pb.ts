@@ -6,8 +6,16 @@ routerAdd("GET", "/api/flights", (c) => {
 
     let data = {};
 
-    if (!$app.isDev()) {
-
+    if ($app.isDev() || $apis.requestInfo(c).authRecord?.email() === 'demouser@example.com') {
+        // @ts-ignore
+        data.statusCode = 203
+        // @ts-ignore
+        data.json = $http.send({
+            url: 'http://localhost:8090/flightAwareTestData.json',
+            method: 'GET'
+        }).json
+    }
+    else {
         data = $http.send({
             url: `https://aeroapi.flightaware.com/aeroapi/flights/search/advanced?query={in dest {PHNL}} {airline 1} {false cancelled} {in status {A Z}}&max_pages=10`,
             method: "GET",
@@ -21,15 +29,6 @@ routerAdd("GET", "/api/flights", (c) => {
         $app.dao().saveRecord(new Record($app.dao().findCollectionByNameOrId("external_api_requests"), {
             user: $app.dao().findAuthRecordByToken($apis.requestInfo(c).headers.authorization.substring(7), $app.settings().recordAuthToken.secret).getId()
         }))
-    }
-    else {
-        // @ts-ignore
-        data.statusCode = 203
-        // @ts-ignore
-        data.json = $http.send({
-            url: 'http://localhost:8090/flightAwareTestData.json',
-            method: 'GET'
-        }).json
     }
 
     // @ts-ignore

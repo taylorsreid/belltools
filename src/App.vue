@@ -48,11 +48,24 @@ function navigate(target:string) {
 
 <template>
     <Suspense>
-        <Layout v-if="isLoggedIn" :user="pb.authStore.model" @nav="navigate">
-            <Home v-if="currentPage === 'home'" />
-            <About v-if="currentPage === 'about'" />
-            <Account v-if="currentPage === 'account'" />
+        <div>
+            <div v-if="pb.authStore.model?.email === 'demouser@example.com'" id="demoBanner">You are viewing Lani in demo mode. Data will be static.</div>
+            <Layout v-if="isLoggedIn" :user="pb.authStore.model" @nav="navigate">
+                <Home v-if="currentPage === 'home'" />
+                <About v-if="currentPage === 'about'" />
+                <Account v-if="currentPage === 'account'" />
         </Layout>
+        </div>
     </Suspense>
     <LoggedOutView v-if="!isLoggedIn" @login-attempt="login" :error-message="errorMessage" />
 </template>
+
+<style scoped>
+    #demoBanner {
+        width: 100%;
+        background-color: red;
+        color: white;
+        text-align: center;
+        font-size: larger;
+    }
+</style>
