@@ -59,3 +59,16 @@ export interface ApiResponse {
     num_pages: number,
     flights: Flight[]
 }
+
+export interface AuthFormData {
+    email?: string,
+    password?: string,
+    passwordConfirm?: string,
+    name?: string,
+    reasonNeeded?: String
+}
+
+export interface AuthMessage {
+    message?: String,
+    color?: String
+}
