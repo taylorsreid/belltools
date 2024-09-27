@@ -4,11 +4,14 @@ import { Flight } from "../../types";
 import { storeToRefs } from 'pinia'
 import MainContent from './MainContent.vue';
 import Layout from './Layout.vue';
+import PocketBase from 'pocketbase'
+import apiUrl from '../apiUrl';
 
+const pb = new PocketBase(apiUrl)
 const flightsStore = useFlightsStore()
-await flightsStore.callApi()
-
 const { hideLanded, sortBy } = storeToRefs(flightsStore)
+
+flightsStore.callApi()
 
 function getVarianceStyle(flight: Flight): string {
     const varianceInMinutes = getVarianceInMinutes(flight)
@@ -43,6 +46,7 @@ function getVarianceInMinutes(flight: Flight): number {
 </script>
 
 <template>
+    <div v-if="pb.authStore.model?.email === 'demouser@example.com'" id="demoBanner">You are viewing Bell Tools in demo mode. Data will be static.</div>
     <Layout>
         <h1>Arriving Flights</h1>
 
@@ -114,5 +118,13 @@ function getVarianceInMinutes(flight: Flight): number {
             padding: 1rem;
         }
     }
+}
+
+#demoBanner {
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+    font-size: larger;
 }
 </style>

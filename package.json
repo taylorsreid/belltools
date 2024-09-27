@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "./pb/pocketbase serve --dev & vite",
+    "preview": "vue-tsc && vite build && ./pb/pocketbase serve --dev",
     "build": "vue-tsc && vite build",
-    "preview": "vue-tsc && vite build && ./pb/pocketbase serve --dev"
+    "deploy": "mv .gitignore ..gitignore && cd pb && railway up -d && cd .. && mv ..gitignore .gitignore"
   },
   "dependencies": {
     "pinia": "^2.1.7",

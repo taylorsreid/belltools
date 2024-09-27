@@ -10,7 +10,6 @@ function logout() {
 </script>
 
 <template>
-    <div v-if="pb.authStore.model?.email === 'demouser@example.com'" id="demoBanner">You are viewing Lani in demo mode. Data will be static.</div>
     <ul id="navbar">
         <li><RouterLink to="/flights" class="routerLink">Flights</RouterLink></li>
         <li><RouterLink to="/cut" class="routerLink">Cut</RouterLink></li>
@@ -77,14 +76,6 @@ li.dropdown {
 
 .dropdown:hover .dropdown-content {
     display: block;
-}
-
-#demoBanner {
-    width: 100%;
-    background-color: red;
-    color: white;
-    text-align: center;
-    font-size: larger;
 }
 
 a:visited {

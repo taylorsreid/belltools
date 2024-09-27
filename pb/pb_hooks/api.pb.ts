@@ -6,7 +6,7 @@ routerAdd("GET", "/api/flights", (c) => {
 
     let data = {};
 
-    if ($app.isDev() || $apis.requestInfo(c).authRecord?.email() === 'demouser@example.com') {
+    if ($apis.requestInfo(c).authRecord?.email() === 'demouser@example.com') {
         // @ts-ignore
         data.statusCode = 203
         // @ts-ignore

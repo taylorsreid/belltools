@@ -56,7 +56,7 @@ async function handleAuth(e: Event) {
 </script>
 
 <template>
-    <h1>Lani</h1>
+    <h1>Bell Tools</h1>
     
     <div id="container">
         <form @submit="handleAuth">
