@@ -5,9 +5,9 @@ import MainContent from './MainContent.vue';
 
 <template>
     <Layout>
-        <h1 class="title">About</h1>
-        <MainContent class="centered" width="fit-content">
-            
+        <h1>About</h1>
+        <MainContent>
+
             <h2 id="what">What</h2>
             <ul>
                 <li>Lani is a simple dashboard for tracking arriving flights into Honolulu.</li>
@@ -53,7 +53,7 @@ import MainContent from './MainContent.vue';
 </template>
 
 <style scoped>
-    li {
-        margin-top: 1rem;
-    }
+li {
+    margin-top: 1rem;
+}
 </style>

@@ -11,9 +11,9 @@ function logout() {
 
 <template>
     <div v-if="pb.authStore.model?.email === 'demouser@example.com'" id="demoBanner">You are viewing Lani in demo mode. Data will be static.</div>
-    <ul class="navbar">
-        <li><RouterLink to="/" class="routerLink">Home</RouterLink></li>
-        <li>&nbsp;</li>
+    <ul id="navbar">
+        <li><RouterLink to="/flights" class="routerLink">Flights</RouterLink></li>
+        <li><RouterLink to="/cut" class="routerLink">Cut</RouterLink></li>
         <li><RouterLink to="/about" class="routerLink">About</RouterLink></li>
         <li class="dropdown">
             <a class="dropbtn">{{ pb.authStore.model?.name }} &#9660;</a>
@@ -28,7 +28,7 @@ function logout() {
 </template>
 
 <style scoped>
-.navbar {
+#navbar {
     list-style-type: none;
     padding: 0;
     overflow: hidden;
@@ -56,14 +56,12 @@ li.dropdown {
 }
 
 .dropdown-content a:hover {
-    background-color: lightblue;
     border-radius: 10px;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -71,7 +69,6 @@ li.dropdown {
 }
 
 .dropdown-content a {
-    color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -88,5 +85,9 @@ li.dropdown {
     color: white;
     text-align: center;
     font-size: larger;
+}
+
+a:visited {
+    color: white;
 }
 </style>

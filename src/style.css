@@ -1,27 +1,5 @@
 body {
-    background-image: url("./assets/clouds.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
-@media (prefers-color-scheme: light) {
-    :root {
-        color: #213547;
-        background-color: #ffffff;
-    }
-
-    a:hover {
-        color: #747bff;
-    }
-
-    button {
-        background-color: #f9f9f9;
-    }
-}
-
-.centered {
-    margin: auto;
-    width: 50%;
+    background-color: #462D1F;
 }
 
 .centeredText {
@@ -35,25 +13,4 @@ h1 {
     color: white;
     font-size: xxx-large;
     font-family: 'Poppins', sans-serif;
-}
-
-/* h2 {
-    text-align: center;
-    color: white;
-    font-size: large;
-    font-family: 'Poppins', sans-serif;
-} */
-
-#resultsTable {
-    width: 95%;
-    border-collapse: collapse;
-
-    tr {
-        border-bottom: 1px solid gray;
-        ;
-
-        td {
-            padding: 1rem;
-        }
-    }
 }

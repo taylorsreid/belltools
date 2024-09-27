@@ -18,7 +18,7 @@ async function handleAuth(e: Event) {
     try {
         if (router.currentRoute.value.name === 'Login') {
             await pb.collection('users').authWithPassword(fd.value.email!, fd.value.password!);
-            router.push('/')
+            router.push('/flights')
         }
         else if (router.currentRoute.value.name === 'Register') {
             const user = await pb.collection('users').create(fd.value)
@@ -56,7 +56,7 @@ async function handleAuth(e: Event) {
 </script>
 
 <template>
-    <h1 class="title">Lani</h1>
+    <h1>Lani</h1>
     
     <div id="container">
         <form @submit="handleAuth">

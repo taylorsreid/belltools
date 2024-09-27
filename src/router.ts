@@ -1,10 +1,11 @@
 import PocketBase from 'pocketbase'
 import apiUrl from './apiUrl';
 import { Router, createRouter, createWebHashHistory } from 'vue-router'
-import Home from './components/Home.vue';
+import Flights from './components/Flights.vue';
 import About from './components/About.vue';
 import Account from './components/Account.vue';
 import LoginRegister from './components/LoginRegister.vue';
+import Cut from './components/Cut.vue';
 
 
 const pb = new PocketBase(apiUrl)
@@ -13,12 +14,9 @@ const router:Router = createRouter({
     history: createWebHashHistory(),
     routes: [
         {
-            name: 'Home',
-            path: '/',
-            component: Home,
-            meta : {
-                isPublic: false
-            }
+            name: 'lights',
+            path: '/flights',
+            component: Flights,
         },
         {
             name: 'Login',
@@ -39,18 +37,17 @@ const router:Router = createRouter({
         {
             name: 'About',
             path: '/about',
-            component: About,
-            meta: {
-                isPublic: false
-            }
+            component: About
         },
         {
             name: 'Account',
             path: '/account',
-            component: Account,
-            meta: {
-                isPublic: false
-            }
+            component: Account
+        },
+        {
+            name: 'Cut',
+            path: '/cut',
+            component: Cut
         }
     ]
 })

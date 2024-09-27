@@ -1,17 +1,16 @@
 <script setup lang="ts">
 import { useFlightsStore } from '../stores';
 import { Flight } from "../../types";
+import { storeToRefs } from 'pinia'
+import MainContent from './MainContent.vue';
+import Layout from './Layout.vue';
 
 const flightsStore = useFlightsStore()
 await flightsStore.callApi()
 
-import { storeToRefs } from 'pinia'
-import MainContent from './MainContent.vue';
-import Layout from './Layout.vue';
-// @ts-ignore
-const { apiResponse, hideLanded, sortBy } = storeToRefs(flightsStore)
+const { hideLanded, sortBy } = storeToRefs(flightsStore)
 
-function getVarianceStyle(flight:Flight): string {
+function getVarianceStyle(flight: Flight): string {
     const varianceInMinutes = getVarianceInMinutes(flight)
     if (varianceInMinutes <= 0 || isNaN(varianceInMinutes)) {
         return 'background-color: #0026ff; color: white' // green
@@ -24,8 +23,8 @@ function getVarianceStyle(flight:Flight): string {
     }
 }
 
-function getStatusStyle(flight:Flight) {
-    if(flight.actual_on) {
+function getStatusStyle(flight: Flight) {
+    if (flight.actual_on) {
         return 'background-color: #129e00; color: white' // green
     }
     else {
@@ -33,19 +32,19 @@ function getStatusStyle(flight:Flight) {
     }
 }
 
-function getVarianceInMinutes(flight:Flight): number {
-        if (flight.predicted_off && flight.actual_off) {
-            return Math.round((new Date(flight.actual_off).getTime() - new Date(flight.predicted_off).getTime()) / 60000)
-        }
-        else {
-            return 0
-        }
+function getVarianceInMinutes(flight: Flight): number {
+    if (flight.predicted_off && flight.actual_off) {
+        return Math.round((new Date(flight.actual_off).getTime() - new Date(flight.predicted_off).getTime()) / 60000)
     }
+    else {
+        return 0
+    }
+}
 </script>
 
 <template>
     <Layout>
-        <h1 class="title">Arriving Flights</h1>
+        <h1>Arriving Flights</h1>
 
         <div class="centeredText">
             <button @click="flightsStore.callApi()">Refresh</button>
@@ -62,7 +61,7 @@ function getVarianceInMinutes(flight:Flight): number {
             <input type="checkbox" id="hideLanded" v-model="hideLanded">
         </div>
 
-        <MainContent class="centeredText">
+        <MainContent>
             <table class="centeredText" id="resultsTable">
                 <tr>
                     <th>Flight</th>
@@ -103,3 +102,17 @@ function getVarianceInMinutes(flight:Flight): number {
         </MainContent>
     </Layout>
 </template>
+
+<style scoped>
+#resultsTable {
+    width: 95%;
+    border-collapse: collapse;
+
+    tr {
+        border-bottom: 1px solid gray;
+        td {
+            padding: 1rem;
+        }
+    }
+}
+</style>

@@ -1,12 +1,12 @@
 {
-  "name": "lani",
+  "name": "belltools",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "./pb/pocketbase serve --dev & vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vue-tsc && vite build && ./pb/pocketbase serve --dev"
   },
   "dependencies": {
     "pinia": "^2.1.7",

@@ -1,17 +1,7 @@
-<script setup lang="ts">
-    defineProps({
-        class: String,
-        width: {
-            type: String,
-            default: '80%'
-        }
-    })
-</script>
-
 <template>
     <br>
     <br>
-    <div :class="class" id="resultsBackground">
+    <div id="resultsBackground" style="margin: auto; width: fit-content;">
         <slot />
     </div>
 </template>
@@ -19,7 +9,6 @@
 <style scoped>
     #resultsBackground {
         background-color: white;
-        width: v-bind(width);
         border-radius: 40px;
         padding: 1%;
     }

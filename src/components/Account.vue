@@ -26,8 +26,8 @@ const total:string = await pb.collection('total_requests_per_person').getFirstLi
 
 <template>
     <Layout>
-        <h1 class="title">My Account</h1>
-        <MainContent class="centeredText" width="fit-content">
+        <h1>My Account</h1>
+        <MainContent>
             <table class="centeredText" id="resultsTable">
                 <tr>
                     <td>Name:</td>
